@@ -1,0 +1,188 @@
+<template name="TeamTimesheetsParentProjectsUsersParentTeamTimesheetProjectsUsers">
+	<div class="page-container container" id="content">
+		<div class="row" id="title_row">
+			<div class="col-md-12">
+				<h2 id="page_title" class="pull-left">
+					My Team's Timesheet
+				</h2>
+			</div>
+		</div>
+		{{> TeamTimesheetsParentProjectsUsersParentTeamTimesheetProjectsUsersByProjectsUsersDataForm}}{{> TeamTimesheetsParentProjectsUsersParentTeamTimesheetProjectsUsersByProjectsUsersWeekNav}}{{> TeamTimesheetsParentProjectsUsersParentTeamTimesheetProjectsUsersByProjectsUsersDataView}}
+	</div>
+</template>
+
+<template name="TeamTimesheetsParentProjectsUsersParentTeamTimesheetProjectsUsersByProjectsUsersDataForm">
+	<div id="team-timesheets-parent-projects-users-parent-team-timesheet-projects-users-by-projects-users-data-form" class="">
+		<form role="form">
+			{{#if errorMessage}}
+			<div class="alert alert-warning">
+				{{errorMessage}}
+			</div>
+			{{/if}}
+
+			{{#if infoMessage}}
+			<div class="alert alert-success">
+				{{infoMessage}}
+			</div>
+			{{/if}}
+			<div class="form-group  field-project">
+				<label for="project">
+				</label>
+				<div class="input-div">
+					<select id="team_timesheet_proj_select" class="form-control " name="project" data-type="string" required="required" autofocus="autofocus">
+						<option value="project_select" selected>							Select a Project</option>
+						{{#each teaming}}
+						<option value="{{_id}}">							{{title}}</option>
+						{{/each}}
+					</select>
+					<span id="help-text" class="help-block">
+					</span>
+					<span id="error-text" class="help-block">
+					</span>
+				</div>
+			</div>
+			<div class="form-group">
+				<div class="submit-div">
+				</div>
+			</div>
+		</form>
+	</div>
+	{{> TeamTimesheetsParentProjectsUsersParentTeamTimesheetProjectsUsersByProjectsUsersDataFormUsersForm}}
+</template>
+
+<template name="TeamTimesheetsParentProjectsUsersParentTeamTimesheetProjectsUsersByProjectsUsersDataFormUsersForm">
+	<div id="team-timesheets-parent-projects-users-parent-team-timesheet-projects-users-by-projects-users-data-form-users-form" class="">
+		<form role="form">
+			{{#if errorMessage}}
+			<div class="alert alert-warning">
+				{{errorMessage}}
+			</div>
+			{{/if}}
+
+			{{#if infoMessage}}
+			<div class="alert alert-success">
+				{{infoMessage}}
+			</div>
+			{{/if}}
+			<div class="form-group  field-user-id">
+				<label for="userId">
+				</label>
+				<div class="input-div">
+					<select id="team_timesheet_member_select" class="form-control " name="userId" data-type="string" autofocus="autofocus">
+						<option value="select_user" selected>							Please select a Member</option>
+						{{#each project_users_list}}
+						<option value="{{userId}}">							{{user.profile.name}}</option>
+						{{/each}}
+					</select>
+					<span id="help-text" class="help-block">
+					</span>
+					<span id="error-text" class="help-block">
+					</span>
+				</div>
+			</div>
+			<div class="form-group">
+				<div class="submit-div">
+				</div>
+			</div>
+		</form>
+	</div>
+</template>
+
+<template name="TeamTimesheetsParentProjectsUsersParentTeamTimesheetProjectsUsersByProjectsUsersWeekNav">
+	<div>
+		<button type="button" class="previousBtn fa fa-arrow-circle-left">
+		</button>
+		<h4>
+			Heading 4
+		</h4>
+		<button type="button" class="nextBtn fa fa-arrow-circle-right">
+		</button>
+	</div>
+</template>
+
+<template name="TeamTimesheetsParentProjectsUsersParentTeamTimesheetProjectsUsersByProjectsUsersDataView">
+	<div id="team-timesheets-parent-projects-users-parent-team-timesheet-projects-users-by-projects-users-data-view" class="">
+		<form id="dataview-controls" class="form-inline">
+			<div id="dataview-controls-search">
+				<div id="dataview-controls-search-group" class="input-group">
+					<input type="text" class="form-control" id="dataview-search-input" placeholder="Search" name="search" value="{{searchString}}" autofocus="autofocus">
+					<span class="input-group-btn">
+						<button type="button" id="dataview-search-button" class="btn btn-primary">
+							<span class="fa fa-search">
+							</span>
+						</button>
+					</span>
+				</div>
+			</div>
+		</form>
+		{{#if isNotEmpty}}
+			{{#if isNotFound}}
+		<div class="alert alert-warning">
+			"{{searchString}}" not found.
+		</div>
+		{{else}}
+		<div id="dataview-data">
+			{{#if viewAsTable}} {{> TeamTimesheetsParentProjectsUsersParentTeamTimesheetProjectsUsersByProjectsUsersDataViewTable}} {{/if}}
+		</div>
+		{{/if}}
+		{{else}}
+		<div class="alert alert-info">
+			Empty.
+		</div>
+		{{/if}}
+	</div>
+</template>
+
+<template name="TeamTimesheetsParentProjectsUsersParentTeamTimesheetProjectsUsersByProjectsUsersDataViewTable">
+	<table id="dataview-table" class="table table-striped">
+		<thead id="dataview-table-header">
+			<tr id="dataview-table-header-row">
+				<th class="th-sortable" data-sort="project.title">
+					Project
+				</th>
+				<th class="th-sortable" data-sort="user.profile.name">
+					Full Name
+				</th>
+				<th class="th-sortable" data-sort="date">
+					Date
+				</th>
+				<th class="th-sortable" data-sort="from_time">
+					From
+				</th>
+				<th class="th-sortable" data-sort="to_time">
+					To
+				</th>
+				<th class="th-sortable" data-sort="totalHrs">
+					Total Hours
+				</th>
+			</tr>
+		</thead>
+		<tbody id="dataview-table-items">
+			{{#each tableItems}} {{> TeamTimesheetsParentProjectsUsersParentTeamTimesheetProjectsUsersByProjectsUsersDataViewTableItems}} {{/each}}
+		</tbody>
+	</table>
+</template>
+
+<template name="TeamTimesheetsParentProjectsUsersParentTeamTimesheetProjectsUsersByProjectsUsersDataViewTableItems">
+	<tr id="dataview-table-items-row">
+		<td>
+			{{project.title}}
+		</td>
+		<td>
+			{{user.profile.name}}
+		</td>
+		<td>
+			{{formatDate date ''}}
+		</td>
+		<td>
+			{{secondsToTime from_time ''}}
+		</td>
+		<td>
+			{{secondsToTime to_time ''}}
+		</td>
+		<td>
+			{{totalHrs}}
+		</td>
+	</tr>
+</template>
+

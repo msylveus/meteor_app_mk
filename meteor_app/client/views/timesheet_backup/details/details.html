@@ -1,0 +1,92 @@
+<template name="TimesheetBackupDetails">
+	<div class="page-container container" id="content">
+		<div class="row" id="title_row">
+			<div class="col-md-12">
+			</div>
+		</div>
+		{{> TimesheetBackupDetailsForm}}
+	</div>
+</template>
+
+<template name="TimesheetBackupDetailsForm">
+	<div id="timesheet-backup-details-form" class="">
+		<h2 id="component-title">
+			<a href="#" id="form-back-button" class="btn btn-default" title="back">
+				<span class="fa fa-chevron-left">
+				</span>
+			</a>
+			Timesheet Backups Details
+		</h2>
+		<form role="form">
+			{{#if errorMessage}}
+			<div class="alert alert-warning">
+				{{errorMessage}}
+			</div>
+			{{/if}}
+
+			{{#if infoMessage}}
+			<div class="alert alert-success">
+				{{infoMessage}}
+			</div>
+			{{/if}}
+			<div class="form-group  field-project-title">
+				<label for="project.title">
+					Project
+				</label>
+				<div class="input-div">
+					<p class="form-control-static  control-field-project-title">
+						{{timesheet_backups.project.title}}
+					</p>
+				</div>
+			</div>
+			<div class="form-group  field-date">
+				<label for="date">
+					Date
+				</label>
+				<div class="input-div">
+					<p class="form-control-static  control-field-date">
+						{{formatDate timesheet_backups.date ''}}
+					</p>
+				</div>
+			</div>
+			<div class="form-group  field-from_time">
+				<label for="from_time">
+					From
+				</label>
+				<div class="input-div">
+					<p class="form-control-static  control-field-from_time">
+						{{secondsToTime timesheet_backups.from_time ''}}
+					</p>
+				</div>
+			</div>
+			<div class="form-group  field-to_time">
+				<label for="to_time">
+					To
+				</label>
+				<div class="input-div">
+					<p class="form-control-static  control-field-to_time">
+						{{secondsToTime timesheet_backups.to_time ''}}
+					</p>
+				</div>
+			</div>
+			<div class="form-group  field-total-hrs">
+				<label for="totalHrs">
+					Total Hours
+				</label>
+				<div class="input-div">
+					<p class="form-control-static  control-field-total-hrs">
+						{{timesheet_backups.totalHrs}}
+					</p>
+				</div>
+			</div>
+			<div class="form-group">
+				<div class="submit-div">
+					<a href="#" id="form-close-button" class="btn btn-primary">
+						OK
+					</a>
+				</div>
+			</div>
+		</form>
+	</div>
+</template>
+

@@ -1,0 +1,90 @@
+<template name="EmploeeList">
+	<div class="page-container" id="content">
+		<div class="row" id="title_row">
+			<div class="col-md-12">
+			</div>
+		</div>
+		<button type="button" class="btn btn-primary" style="background-color:#2c303b">
+			Back
+		</button>
+		{{> EmploeeListNewDataView}}
+	</div>
+</template>
+
+<template name="EmploeeListNewDataView">
+	<div id="emploee-list-new-data-view" class="">
+		<h2 id="component-title">
+			Employee List
+		</h2>
+		<form id="dataview-controls" class="form-inline">
+			<div id="dataview-controls-search">
+				<div id="dataview-controls-search-group" class="input-group">
+					<input type="text" class="form-control" id="dataview-search-input" placeholder="Search" name="search" value="{{searchString}}" autofocus="autofocus">
+					<span class="input-group-btn">
+						<button type="button" id="dataview-search-button" class="btn btn-primary">
+							<span class="fa fa-search">
+							</span>
+						</button>
+					</span>
+				</div>
+			</div>
+		</form>
+		{{#if isNotEmpty}}
+			{{#if isNotFound}}
+		<div class="alert alert-warning">
+			"{{searchString}}" not found.
+		</div>
+		{{else}}
+		<div id="dataview-data">
+			{{#if viewAsTable}} {{> EmploeeListNewDataViewTable}} {{/if}}
+		</div>
+		{{/if}}
+		{{else}}
+		<div class="alert alert-info">
+			Empty.
+		</div>
+		{{/if}}
+	</div>
+</template>
+
+<template name="EmploeeListNewDataViewTable">
+	<table id="dataview-table" class="table table-striped">
+		<thead id="dataview-table-header">
+			<tr id="dataview-table-header-row">
+				<th class="th-sortable" data-sort="user.profile.name">
+					First Name
+				</th>
+				<th class="th-sortable" data-sort="user.profile.nameL">
+					Last Name
+				</th>
+				<th class="th-sortable" data-sort="user.profile.email">
+					Email
+				</th>
+				<th class="th-sortable" data-sort="projectTitle">
+					projectTitle
+				</th>
+			</tr>
+		</thead>
+		<tbody id="dataview-table-items">
+			{{#each tableItems}} {{> EmploeeListNewDataViewTableItems}} {{/each}}
+		</tbody>
+	</table>
+</template>
+
+<template name="EmploeeListNewDataViewTableItems">
+	<tr id="dataview-table-items-row">
+		<td>
+			{{user.profile.name}}
+		</td>
+		<td>
+			{{user.profile.nameL}}
+		</td>
+		<td>
+			{{user.profile.email}}
+		</td>
+		<td>
+			{{projectTitle}}
+		</td>
+	</tr>
+</template>
+

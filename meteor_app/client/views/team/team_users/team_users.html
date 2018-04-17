@@ -1,0 +1,134 @@
+<template name="TeamTeamUsers">
+	<div class="page-container container" id="content">
+		<div class="row" id="title_row">
+			<div class="col-md-12">
+				<h2 id="page_title" class="pull-left">
+					Team
+				</h2>
+			</div>
+		</div>
+		{{> TeamTeamUsersTeamUsersForm}}{{> TeamTeamUsersTeamUsersDataView}}{{> TeamTeamUsersNewCustomComponent}}
+	</div>
+</template>
+
+<template name="TeamTeamUsersTeamUsersForm">
+	<div id="team-team-users-team-users-form" class="">
+		<form role="form">
+			{{#if errorMessage}}
+			<div class="alert alert-warning">
+				{{errorMessage}}
+			</div>
+			{{/if}}
+
+			{{#if infoMessage}}
+			<div class="alert alert-success">
+				{{infoMessage}}
+			</div>
+			{{/if}}
+			<div class="form-group  field-project">
+				<label for="project">
+				</label>
+				<div class="input-div">
+					<select id="team_employee-select" class="form-control " name="project" data-type="string" autofocus="autofocus">
+						<option value="select_project" selected>							Select a Project</option>
+						{{#each teaming}}
+						<option value="{{_id}}">							{{title}}</option>
+						{{/each}}
+					</select>
+					<span id="help-text" class="help-block">
+					</span>
+					<span id="error-text" class="help-block">
+					</span>
+				</div>
+			</div>
+			<div class="form-group">
+				<div class="submit-div">
+				</div>
+			</div>
+		</form>
+	</div>
+</template>
+
+<template name="TeamTeamUsersTeamUsersDataView">
+	<div id="team-team-users-team-users-data-view" class="">
+		<h2 id="component-title">
+			Team Members
+		</h2>
+		<form id="dataview-controls" class="form-inline">
+			<div id="dataview-controls-search">
+				<div id="dataview-controls-search-group" class="input-group">
+					<input type="text" class="form-control" id="dataview-search-input" placeholder="Search" name="search" value="{{searchString}}" autofocus="autofocus">
+					<span class="input-group-btn">
+						<button type="button" id="dataview-search-button" class="btn btn-primary">
+							<span class="fa fa-search">
+							</span>
+						</button>
+					</span>
+				</div>
+			</div>
+		</form>
+		{{#if isNotEmpty}}
+			{{#if isNotFound}}
+		<div class="alert alert-warning">
+			"{{searchString}}" not found.
+		</div>
+		{{else}}
+		<div id="dataview-data">
+			{{#if viewAsTable}} {{> TeamTeamUsersTeamUsersDataViewTable}} {{/if}}
+		</div>
+		{{/if}}
+		{{else}}
+		<div class="alert alert-info">
+			Please select a project
+		</div>
+		{{/if}}
+	</div>
+</template>
+
+<template name="TeamTeamUsersTeamUsersDataViewTable">
+	<table id="dataview-table" class="table table-striped">
+		<thead id="dataview-table-header">
+			<tr id="dataview-table-header-row">
+				<th class="th-sortable" data-sort="user.profile.name">
+					First Name
+				</th>
+				<th class="th-sortable" data-sort="user.profile.nameL">
+					Last Name
+				</th>
+				<th class="th-sortable" data-sort="user.profile.email">
+					Email
+				</th>
+				<th class="th-sortable" data-sort="projectTitle">
+					projectTitle
+				</th>
+			</tr>
+		</thead>
+		<tbody id="dataview-table-items">
+			{{#each tableItems}} {{> TeamTeamUsersTeamUsersDataViewTableItems}} {{/each}}
+		</tbody>
+	</table>
+</template>
+
+<template name="TeamTeamUsersTeamUsersDataViewTableItems">
+	<tr id="dataview-table-items-row">
+		<td>
+			{{user.profile.name}}
+		</td>
+		<td>
+			{{user.profile.nameL}}
+		</td>
+		<td>
+			{{user.profile.email}}
+		</td>
+		<td>
+			{{projectTitle}}
+		</td>
+	</tr>
+</template>
+
+<template name="TeamTeamUsersNewCustomComponent">
+	<button class="btn btn-default">
+		Add New Member
+	</button>
+</template>
+

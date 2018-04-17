@@ -1,0 +1,83 @@
+<template name="Reports">
+	<div class="page-container container" id="content">
+		<div class="row" id="title_row">
+			<div class="col-md-12">
+			</div>
+		</div>
+		{{> ReportsReportsHomeForm}}
+	</div>
+</template>
+
+<template name="ReportsReportsHomeForm">
+	<div id="reports-reports-home-form" class="">
+		<form role="form">
+			{{#if errorMessage}}
+			<div class="alert alert-warning">
+				{{errorMessage}}
+			</div>
+			{{/if}}
+
+			{{#if infoMessage}}
+			<div class="alert alert-success">
+				{{infoMessage}}
+			</div>
+			{{/if}}
+			<div class="form-group  field-report_type">
+				<label for="report_type">
+					Report Type
+				</label>
+				<div class="input-div">
+					<select class="form-control " name="report_type" data-type="string" required="required" autofocus="autofocus">
+						<option value="day" selected>							Day</option>
+						<option value="week">							Week</option>
+						<option value="month">							Month</option>
+						<option value="date_range">							Date Range</option>
+					</select>
+					<span id="help-text" class="help-block">
+					</span>
+					<span id="error-text" class="help-block">
+					</span>
+				</div>
+			</div>
+			<div class="form-group  field-project-id">
+				<label for="projectId">
+					Project
+				</label>
+				<div class="input-div">
+					<select class="form-control " name="projectId" data-type="string" required="required">
+						<option value="select_project" selected>							Select a Project</option>
+						{{#each teaming}}
+						<option value="{{_id}}">							{{title}}</option>
+						{{/each}}
+					</select>
+					<span id="help-text" class="help-block">
+					</span>
+					<span id="error-text" class="help-block">
+					</span>
+				</div>
+			</div>
+			<div class="form-group  field-user-id">
+				<label for="userId">
+					Employee
+				</label>
+				<div class="input-div">
+					<select class="form-control " name="userId" data-type="string">
+						<option value="select_user" selected>							Select an Employee</option>
+						{{#each projects_users_by_supervior}}
+						<option value="{{userId}}">							{{user.profile.name}}</option>
+						{{/each}}
+					</select>
+					<span id="help-text" class="help-block">
+					</span>
+					<span id="error-text" class="help-block">
+					</span>
+				</div>
+			</div>
+			<div class="form-group">
+				<div class="submit-div">
+				</div>
+			</div>
+		</form>
+	</div>
+</template>
+

@@ -1,0 +1,93 @@
+<template name="ReportsReportByProjectAndUser">
+	<div class="page-container container" id="content">
+		<div class="row" id="title_row">
+			<div class="col-md-12">
+			</div>
+		</div>
+		{{> ReportsReportByProjectAndUserProjectUserCustomComponent}}{{> ReportsReportByProjectAndUserProjectUserDataView}}
+	</div>
+</template>
+
+<template name="ReportsReportByProjectAndUserProjectUserCustomComponent">
+</template>
+
+<template name="ReportsReportByProjectAndUserProjectUserDataView">
+	<div id="reports-report-by-project-and-user-project-user-data-view" class="">
+		<form id="dataview-controls" class="form-inline">
+			<div id="dataview-controls-search">
+				<div id="dataview-controls-search-group" class="input-group">
+					<input type="text" class="form-control" id="dataview-search-input" placeholder="Search" name="search" value="{{searchString}}" autofocus="autofocus">
+					<span class="input-group-btn">
+						<button type="button" id="dataview-search-button" class="btn btn-primary">
+							<span class="fa fa-search">
+							</span>
+						</button>
+					</span>
+				</div>
+			</div>
+		</form>
+		{{#if isNotEmpty}}
+			{{#if isNotFound}}
+		<div class="alert alert-warning">
+			"{{searchString}}" not found.
+		</div>
+		{{else}}
+		<div id="dataview-data">
+			{{#if viewAsTable}} {{> ReportsReportByProjectAndUserProjectUserDataViewTable}} {{/if}}
+		</div>
+		{{/if}}
+		{{else}}
+		<div class="alert alert-info">
+			Empty.
+		</div>
+		{{/if}}
+	</div>
+</template>
+
+<template name="ReportsReportByProjectAndUserProjectUserDataViewTable">
+	<table id="dataview-table" class="table table-striped">
+		<thead id="dataview-table-header">
+			<tr id="dataview-table-header-row">
+				<th class="th-sortable" data-sort="title">
+					Project Name
+				</th>
+				<th class="th-sortable" data-sort="user.profile.name">
+					Supervisor
+				</th>
+				<th class="th-sortable" data-sort="users">
+					Employees
+				</th>
+				<th class="th-sortable" data-sort="clientName">
+					Client Name
+				</th>
+				<th class="th-sortable" data-sort="budget">
+					Budget
+				</th>
+			</tr>
+		</thead>
+		<tbody id="dataview-table-items">
+			{{#each tableItems}} {{> ReportsReportByProjectAndUserProjectUserDataViewTableItems}} {{/each}}
+		</tbody>
+	</table>
+</template>
+
+<template name="ReportsReportByProjectAndUserProjectUserDataViewTableItems">
+	<tr id="dataview-table-items-row">
+		<td>
+			{{title}}
+		</td>
+		<td>
+			{{user.profile.name}}
+		</td>
+		<td>
+			{{users}}
+		</td>
+		<td>
+			{{clientName}}
+		</td>
+		<td>
+			{{budget}}
+		</td>
+	</tr>
+</template>
+

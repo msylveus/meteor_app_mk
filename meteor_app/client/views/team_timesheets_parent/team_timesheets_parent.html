@@ -1,0 +1,49 @@
+<template name="TeamTimesheetsParent">
+	<div class="page-container container">
+		<div class="row">
+			<div class="col-md-12" id="content">
+				<div class="row" id="title_row">
+					<div class="col-md-12">
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div id="menu" class="col-sm-3 col-md-2">
+				<h2>
+				</h2>
+				{{> TeamTimesheetsParentSideMenu}}
+			</div>
+			<div id="subcontent" class="col-sm-9 col-md-10">
+				{{> yield region='TeamTimesheetsParentSubcontent'}}
+			</div>
+		</div>
+	</div>
+</template>
+
+<template name="TeamTimesheetsParentSideMenu">
+	<ul id="menu-items" class="nav-pills nav-stacked">
+		<li id="menu-item-simple" class="{{menuItemClass 'team_timesheets_parent.projects_parent'}}">
+			<a href="{{pathFor 'team_timesheets_parent.projects_parent'}}">
+				<span class="item-title">
+					Project
+				</span>
+			</a>
+		</li>
+		<li id="menu-item-simple" class="{{menuItemClass 'team_timesheets_parent.users_parent'}}">
+			<a href="{{pathFor 'team_timesheets_parent.users_parent'}}">
+				<span class="item-title">
+					Member
+				</span>
+			</a>
+		</li>
+		<li id="menu-item-simple" class="{{menuItemClass 'team_timesheets_parent.projects_users_parent'}}">
+			<a href="{{pathFor 'team_timesheets_parent.projects_users_parent'}}">
+				<span class="item-title">
+					Project & Member
+				</span>
+			</a>
+		</li>
+	</ul>
+</template>
+

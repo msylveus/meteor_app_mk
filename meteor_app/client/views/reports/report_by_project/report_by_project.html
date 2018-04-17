@@ -1,0 +1,105 @@
+<template name="ReportsReportByProject">
+	<div class="page-container container" id="content">
+		<div class="row" id="title_row">
+			<div class="col-md-12">
+			</div>
+		</div>
+		{{> ReportsReportByProjectProjectCustomComponent}}{{> ReportsReportByProjectProjectDataView}}
+	</div>
+</template>
+
+<template name="ReportsReportByProjectProjectCustomComponent">
+</template>
+
+<template name="ReportsReportByProjectProjectDataView">
+	<div id="reports-report-by-project-project-data-view" class="">
+		<form id="dataview-controls" class="form-inline">
+			<div id="dataview-controls-search">
+				<div id="dataview-controls-search-group" class="input-group">
+					<input type="text" class="form-control" id="dataview-search-input" placeholder="Search" name="search" value="{{searchString}}" autofocus="autofocus">
+					<span class="input-group-btn">
+						<button type="button" id="dataview-search-button" class="btn btn-primary">
+							<span class="fa fa-search">
+							</span>
+						</button>
+					</span>
+				</div>
+			</div>
+		</form>
+		{{#if isNotEmpty}}
+			{{#if isNotFound}}
+		<div class="alert alert-warning">
+			"{{searchString}}" not found.
+		</div>
+		{{else}}
+		<div id="dataview-data">
+			{{#if viewAsTable}} {{> ReportsReportByProjectProjectDataViewTable}} {{/if}}
+		</div>
+		{{/if}}
+		{{else}}
+		<div class="alert alert-info">
+			Empty.
+		</div>
+		{{/if}}
+	</div>
+</template>
+
+<template name="ReportsReportByProjectProjectDataViewTable">
+	<table id="dataview-table" class="table table-striped">
+		<thead id="dataview-table-header">
+			<tr id="dataview-table-header-row">
+				<th class="th-sortable" data-sort="name">
+					First Name
+				</th>
+				<th class="th-sortable" data-sort="nameL">
+					Last Name
+				</th>
+				<th class="th-sortable" data-sort="email">
+					E-mail
+				</th>
+				<th class="th-sortable" data-sort="address">
+					Address
+				</th>
+				<th class="th-sortable" data-sort="salary">
+					Salary
+				</th>
+				<th class="th-sortable" data-sort="jobTitle">
+					Job Title
+				</th>
+				<th class="th-sortable" data-sort="projects">
+					Projects
+				</th>
+			</tr>
+		</thead>
+		<tbody id="dataview-table-items">
+			{{#each tableItems}} {{> ReportsReportByProjectProjectDataViewTableItems}} {{/each}}
+		</tbody>
+	</table>
+</template>
+
+<template name="ReportsReportByProjectProjectDataViewTableItems">
+	<tr id="dataview-table-items-row">
+		<td>
+			{{name}}
+		</td>
+		<td>
+			{{nameL}}
+		</td>
+		<td>
+			{{email}}
+		</td>
+		<td>
+			{{address}}
+		</td>
+		<td>
+			{{salary}}
+		</td>
+		<td>
+			{{jobTitle}}
+		</td>
+		<td>
+			{{projects}}
+		</td>
+	</tr>
+</template>
+
